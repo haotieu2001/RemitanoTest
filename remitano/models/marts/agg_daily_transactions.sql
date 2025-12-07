@@ -1,4 +1,3 @@
--- models/marts/agg_daily_transactions.sql
 {{
     config(
         materialized='table',

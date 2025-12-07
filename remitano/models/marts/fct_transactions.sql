@@ -1,4 +1,3 @@
--- models/marts/fct_transactions.sql
 {{
     config(
         materialized='table',

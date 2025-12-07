@@ -1,4 +1,3 @@
--- models/marts/agg_monthly_volume.sql
 {{
     config(
         materialized='table',

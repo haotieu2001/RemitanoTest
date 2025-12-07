@@ -1,4 +1,3 @@
--- models/marts/dim_users.sql
 {{
     config(
         materialized='table',

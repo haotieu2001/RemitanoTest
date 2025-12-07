@@ -1,4 +1,3 @@
--- models/staging/stg_rates.sql (UPDATED)
 {{
     config(
         materialized='table',

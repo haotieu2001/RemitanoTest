@@ -1,4 +1,3 @@
--- models/staging/stg_transactions.sql
 {{
     config(
         materialized='table',

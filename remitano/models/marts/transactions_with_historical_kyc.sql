@@ -1,4 +1,3 @@
--- models/marts/transactions_with_historical_kyc.sql
 {{
     config(
         materialized='table',
