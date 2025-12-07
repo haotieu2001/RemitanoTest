@@ -1,0 +1,79 @@
+version: 2
+
+models:
+  - name: stg_users
+    description: "Staging model for users data"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        tests:
+          - unique
+          - not_null
+      - name: kyc_level
+        description: "KYC verification level"
+        tests:
+          - not_null
+          # Could add: accepted_values: [0, 1, 2, 3]
+      - name: created_at
+        description: "User creation timestamp"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "User last update timestamp"
+        tests:
+          - not_null
+
+  - name: stg_transactions
+    description: "Staging model for transactions data"
+    columns:
+      - name: txn_id
+        description: "Unique transaction identifier"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "User who made the transaction"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+      - name: status
+        description: "Transaction status"
+        tests:
+          - not_null
+      - name: source_amount
+        description: "Amount in source currency"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Transaction creation timestamp"
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+
+  - name: stg_rates
+    description: "Staging model for exchange rates"
+    columns:
+      - name: rate_timestamp
+        description: "Timestamp when rate was recorded"
+        tests:
+          - not_null
+      - name: symbol
+        description: "Trading pair symbol"
+        tests:
+          - not_null
+      - name: base_currency
+        description: "Base currency in pair"
+        tests:
+          - not_null
+      - name: quote_currency
+        description: "Quote currency in pair"
+        tests:
+          - not_null
+      - name: close_rate
+        description: "Closing exchange rate"
+        tests:
+          - not_null

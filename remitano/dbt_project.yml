@@ -1,0 +1,71 @@
+name: 'databricks_crypto'
+version: '1.0'
+config-version: 2
+
+profile: 'remitano'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  databricks_crypto:
+    +materialized: table
+    staging:
+      +materialized: table
+      +schema: staging
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  databricks_crypto:
+    +schema: raw
+    +enabled: true
+    users:
+      +column_types:
+        user_id: string
+        kyc_level: integer
+        created_at: timestamp
+        updated_at: timestamp
+    transactions:
+      +column_types:
+        txn_id: string
+        user_id: string
+        status: string
+        source_currency: string
+        destination_currency: string
+        created_at: timestamp
+        source_amount: decimal(38,10)
+        destination_amount: decimal(38,10)
+    rates:
+      +column_types:
+        open_time: timestamp
+        open: decimal(38,10)
+        high: decimal(38,10)
+        low: decimal(38,10)
+        close: decimal(38,10)
+        volume: decimal(38,10)
+        close_time: timestamp
+        quote_asset_volume: decimal(38,10)
+        number_of_trades: integer
+        taker_buy_base_asset_volume: decimal(38,10)
+        taker_buy_quote_asset_volume: decimal(38,10)
+        ignore: integer
+        symbol: string
+        base_currency: string
+        quote_currency: string
+
+vars:
+  usdt_currency: 'USDT'
